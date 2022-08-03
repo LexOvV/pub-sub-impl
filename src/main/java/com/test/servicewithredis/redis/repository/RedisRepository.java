@@ -91,4 +91,6 @@ abstract class RedisRepository<T> {
             throw new RuntimeException(e);
         }
     }
+
+    abstract void add(String key, Object value);
 }
