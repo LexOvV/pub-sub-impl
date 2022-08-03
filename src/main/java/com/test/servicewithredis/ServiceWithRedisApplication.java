@@ -1,0 +1,13 @@
+package com.test.servicewithredis;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ServiceWithRedisApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ServiceWithRedisApplication.class, args);
+	}
+
+}
