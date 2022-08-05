@@ -1,40 +1,38 @@
 package com.test.servicewithredis.redis.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.time.Duration;
+import javax.annotation.PostConstruct;
 import java.util.UUID;
 
 @Repository
-public class RedisRepositoryImpl extends RedisRepository{
-    private static String KEY = "1111";
+public class RedisRepositoryImpl<T> implements RedisRepository<T> {
+    private static final String KEY = "1111";
 
-    private RedisTemplate<String, Object> redisTemplate;
+    private StringRedisTemplate redisTemplate;
     private HashOperations hashOperations;
 
-    protected RedisRepositoryImpl(StringRedisTemplate redisTemplate) {
-        super(redisTemplate);
+    @Autowired
+    public RedisRepositoryImpl(StringRedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
     }
 
-    private void init(RedisTemplate<String, Object> redisTemplate) {
+    @PostConstruct
+    public void init() {
         hashOperations = redisTemplate.opsForHash();
     }
 
     @Override
-    protected String getCollectionName() {
-        return null;
+    public void add(T t) {
+        hashOperations.put(KEY, UUID.randomUUID().toString(), t);
+
     }
 
     @Override
-    protected Duration getTimeToLive() {
-        return null;
-    }
-
-    @Override
-    void add(String key, Object value) {
-        hashOperations.put(KEY, key, value);
+    public T get(String id) {
+        return (T) hashOperations.get(KEY, id);
     }
 }

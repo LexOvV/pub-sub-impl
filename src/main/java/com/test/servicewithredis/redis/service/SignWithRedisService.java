@@ -1,6 +1,6 @@
 package com.test.servicewithredis.redis.service;
 
-import com.test.servicewithredis.redis.repository.RedisRepositoryV2;
+import com.test.servicewithredis.redis.repository.RedisRepository;
 import com.test.servicewithredis.service.SignService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import java.io.ByteArrayInputStream;
 @Service
 @Primary
 public class SignWithRedisService implements SignService {
-    private RedisRepositoryV2<ByteArrayInputStream> redisRepository;
+    private RedisRepository<ByteArrayInputStream> redisRepository;
 
     @Override
     public ResponseEntity<Object> getSign(Object objToSign) {

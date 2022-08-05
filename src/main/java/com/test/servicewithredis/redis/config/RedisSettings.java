@@ -6,25 +6,24 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
+/**
+ * @host - host for redis
+ * @password - password for redis
+ * @port - port for redis
+ */
 
 @Data
 @Component
 @Validated
 @ConfigurationProperties(prefix = "prefix.redis")
 public class RedisSettings {
-    /**
-     * Host for redis.
-     */
+
     @NotNull
     String host;
-    /**
-     * Password for redis.
-     */
+
     @NotNull
     String password;
-    /**
-     * Port for redis.
-     */
+
     @NotNull
     Integer port;
 }
