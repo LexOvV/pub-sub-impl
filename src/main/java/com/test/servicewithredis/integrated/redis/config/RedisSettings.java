@@ -1,4 +1,4 @@
-package com.test.servicewithredis.redis.config;
+package com.test.servicewithredis.integrated.redis.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

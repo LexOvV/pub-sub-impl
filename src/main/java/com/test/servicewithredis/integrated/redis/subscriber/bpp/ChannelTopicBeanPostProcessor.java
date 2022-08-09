@@ -1,6 +1,6 @@
-package com.test.servicewithredis.redis.subscriber.bpp;
+package com.test.servicewithredis.integrated.redis.subscriber.bpp;
 
-import com.test.servicewithredis.redis.subscriber.RedisChanelTopics;
+import com.test.servicewithredis.integrated.redis.subscriber.RedisChanelTopics;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

@@ -1,4 +1,4 @@
-package com.test.servicewithredis.redis.publisher;
+package com.test.servicewithredis.integrated.redis.publisher;
 
 public interface MessagePublisher {
 

@@ -1,6 +1,6 @@
-package com.test.servicewithredis.redis.service;
+package com.test.servicewithredis.integrated.redis.service;
 
-import com.test.servicewithredis.redis.repository.RedisRepository;
+import com.test.servicewithredis.integrated.redis.repository.RedisRepository;
 import com.test.servicewithredis.service.SignService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;

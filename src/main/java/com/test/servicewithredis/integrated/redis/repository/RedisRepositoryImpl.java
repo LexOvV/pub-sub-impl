@@ -1,4 +1,4 @@
-package com.test.servicewithredis.redis.repository;
+package com.test.servicewithredis.integrated.redis.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;

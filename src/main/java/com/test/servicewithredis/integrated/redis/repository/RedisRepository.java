@@ -1,4 +1,4 @@
-package com.test.servicewithredis.redis.repository;
+package com.test.servicewithredis.integrated.redis.repository;
 
 public interface RedisRepository<T> {
     void add(T t);

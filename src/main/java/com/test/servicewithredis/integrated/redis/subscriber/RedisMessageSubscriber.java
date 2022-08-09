@@ -1,4 +1,4 @@
-package com.test.servicewithredis.redis.subscriber;
+package com.test.servicewithredis.integrated.redis.subscriber;
 
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
