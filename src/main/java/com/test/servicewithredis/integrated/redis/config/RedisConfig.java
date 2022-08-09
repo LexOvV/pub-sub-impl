@@ -2,7 +2,7 @@ package com.test.servicewithredis.integrated.redis.config;
 
 import com.test.servicewithredis.integrated.redis.publisher.MessagePublisher;
 import com.test.servicewithredis.integrated.redis.publisher.RedisMessagePublisher;
-import com.test.servicewithredis.integrated.redis.subscriber.RedisChanelTopics;
+import com.test.servicewithredis.integrated.redis.model.RedisChanelTopics;
 import com.test.servicewithredis.integrated.redis.subscriber.RedisMessageSubscriber;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

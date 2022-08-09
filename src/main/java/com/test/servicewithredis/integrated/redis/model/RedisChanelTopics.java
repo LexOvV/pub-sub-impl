@@ -1,6 +1,6 @@
-package com.test.servicewithredis.integrated.redis.subscriber;
+package com.test.servicewithredis.integrated.redis.model;
 
-import com.test.servicewithredis.integrated.redis.subscriber.bpp.ChannelTopicBeanPostProcessor;
+import com.test.servicewithredis.integrated.redis.config.bpp.ChannelTopicBeanPostProcessor;
 import org.springframework.data.redis.listener.ChannelTopic;
 
 import javax.validation.ValidationException;
