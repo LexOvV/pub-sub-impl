@@ -1,8 +1,8 @@
 package com.test.servicewithredis.integrated.redis.config;
 
+import com.test.servicewithredis.integrated.redis.model.RedisChanelTopics;
 import com.test.servicewithredis.integrated.redis.publisher.MessagePublisher;
 import com.test.servicewithredis.integrated.redis.publisher.RedisMessagePublisher;
-import com.test.servicewithredis.integrated.redis.model.RedisChanelTopics;
 import com.test.servicewithredis.integrated.redis.subscriber.RedisMessageSubscriber;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +22,7 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 @ComponentScan(value = "com.test.servicewithredis")
 @RequiredArgsConstructor
 public class RedisConfig {
+
     private final RedisSettings redisSettings;
 
     @Bean
@@ -35,16 +36,13 @@ public class RedisConfig {
     }
 
     @Bean
-    public StringRedisTemplate redisTemplate(RedisConnectionFactory connectionFactory) {
-        StringRedisTemplate template = new StringRedisTemplate();
-        template.setConnectionFactory(connectionFactory);
-
-        return template;
+    public MessageListenerAdapter messageListener() {
+        return new MessageListenerAdapter(new RedisMessageSubscriber());
     }
 
     @Bean
-    public MessageListenerAdapter messageListener() {
-        return new MessageListenerAdapter(new RedisMessageSubscriber());
+    public RedisChanelTopics redisChanelTopics() {
+        return new RedisChanelTopics();
     }
 
     @Bean
@@ -57,12 +55,15 @@ public class RedisConfig {
 
     @Bean
     public MessagePublisher redisPublisher() {
-        return new RedisMessagePublisher(redisTemplate(connectionFactory()), topic("def"));
+        return new RedisMessagePublisher(redisTemplate(connectionFactory()));
     }
 
     @Bean
-    public RedisChanelTopics redisChanelTopics() {
-        return new RedisChanelTopics();
+    public StringRedisTemplate redisTemplate(RedisConnectionFactory connectionFactory) {
+        StringRedisTemplate template = new StringRedisTemplate();
+        template.setConnectionFactory(connectionFactory);
+
+        return template;
     }
 
     @Bean
