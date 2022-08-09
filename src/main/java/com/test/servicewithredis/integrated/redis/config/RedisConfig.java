@@ -55,7 +55,7 @@ public class RedisConfig {
 
     @Bean
     public MessagePublisher redisPublisher() {
-        return new RedisMessagePublisher(redisTemplate(connectionFactory()));
+        return new RedisMessagePublisher(redisTemplate(connectionFactory()), redisChanelTopics());
     }
 
     @Bean

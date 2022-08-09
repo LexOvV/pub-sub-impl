@@ -76,4 +76,13 @@ public final class RedisChanelTopics {
                 .orElseThrow());
         return copyOfTopic;
     }
+
+    /**
+     *   Check if {@link ChannelTopic ChannelTopic} exists in the Set.
+     *
+     * @return true if exists
+     * */
+    public boolean contains(ChannelTopic topic) {
+        return channelTopics.contains(topic);
+    }
 }
