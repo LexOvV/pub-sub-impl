@@ -14,33 +14,31 @@ import java.util.Set;
  * RedisChannelTopic class contains {@link Set Set} of existing topics. <br>
  * Every new topic puts in the Set of channelTopics on creation
  * using {@link ChannelTopicBeanPostProcessor#postProcessAfterInitialization(Object, String) ChannelTopicBeanPostProcessor}
- * */
+ */
 
 public final class RedisChanelTopics {
 
     private volatile static Set<ChannelTopic> channelTopics = new HashSet<>();
 
     /**
-     *  Add new Topic by {@link String String} name.
+     * Add new Topic by {@link String String} name.
      *
      * @return true if such topic doesn't exist and successfully added. false if didn't.
-     *
      * @throws ValidationException if topic name is empty or contains only whitespaces.
-     * */
+     */
     public static synchronized boolean addNewTopic(@NotBlank String name) {
         ChannelTopic newTopic = new ChannelTopic(name);
         return channelTopics.add(newTopic);
     }
 
     /**
-     *  Add new Topic by {@link ChannelTopic ChannelTopic} class.
-     *  Object topic must not be null and topic name must not be empty.
+     * Add new Topic by {@link ChannelTopic ChannelTopic} class.
+     * Object topic must not be null and topic name must not be empty.
      *
      * @return true if such topic doesn't exist and successfully added. false if didn't.
-     *
-     * @throws ValidationException if topic is null.
+     * @throws ValidationException      if topic is null.
      * @throws IllegalArgumentException if topic name is empty or contains only whitespaces.
-     * */
+     */
     public static synchronized boolean addNewTopic(@NotNull ChannelTopic topic) {
         if (topic.getTopic().isBlank()) {
             throw new IllegalArgumentException("Topic name must not be blank");
@@ -50,24 +48,21 @@ public final class RedisChanelTopics {
     }
 
     /**
-     *   The method allows getting {@link Set Set} copies of existing topics.
+     * Check if {@link ChannelTopic ChannelTopic} exists in the Set.
      *
-     * @return {@link Set Set<ChannelTopic>} copies of topics.
-     * */
-    public Set<ChannelTopic> getChannelTopics() {
-        Set<ChannelTopic> copyOfTopics = new HashSet<>();
-        channelTopics.forEach(topic -> copyOfTopics.add(new ChannelTopic(topic.toString())));
-        return copyOfTopics;
+     * @return true if exists
+     */
+    public boolean contains(ChannelTopic topic) {
+        return channelTopics.contains(topic);
     }
 
     /**
-     *   The method allows getting a copy of existing {@link ChannelTopic ChannelTopic} by name.
+     * The method allows getting a copy of existing {@link ChannelTopic ChannelTopic} by name.
      *
      * @return a copy of existing {@link ChannelTopic ChannelTopic}.
-     *
      * @throws NoSuchElementException if topic doesn't exist.
-     * @throws ValidationException if topic name is empty or contains only whitespaces.
-     * */
+     * @throws ValidationException    if topic name is empty or contains only whitespaces.
+     */
     public ChannelTopic getChanelTopicByName(@NotBlank String name) {
         ChannelTopic copyOfTopic = new ChannelTopic(channelTopics.stream()
                 .filter(t -> t.toString().equals(name))
@@ -78,11 +73,13 @@ public final class RedisChanelTopics {
     }
 
     /**
-     *   Check if {@link ChannelTopic ChannelTopic} exists in the Set.
+     * The method allows getting {@link Set Set} copies of existing topics.
      *
-     * @return true if exists
-     * */
-    public boolean contains(ChannelTopic topic) {
-        return channelTopics.contains(topic);
+     * @return {@link Set Set<ChannelTopic>} copies of topics.
+     */
+    public Set<ChannelTopic> getChannelTopics() {
+        Set<ChannelTopic> copyOfTopics = new HashSet<>();
+        channelTopics.forEach(topic -> copyOfTopics.add(new ChannelTopic(topic.toString())));
+        return copyOfTopics;
     }
 }

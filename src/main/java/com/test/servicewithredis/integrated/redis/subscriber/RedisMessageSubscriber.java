@@ -8,7 +8,15 @@ import java.util.List;
 
 public class RedisMessageSubscriber implements MessageListener {
 
-    public static List<String> messageList = new ArrayList<>();
+    public String subscriberName;
+    public List<String> messageList = new ArrayList<>();
+
+    public RedisMessageSubscriber(String subscriberName) {
+        this.subscriberName = subscriberName;
+    }
+
+    public RedisMessageSubscriber() {
+    }
 
     @Override
     public void onMessage(Message message, byte[] pattern) {

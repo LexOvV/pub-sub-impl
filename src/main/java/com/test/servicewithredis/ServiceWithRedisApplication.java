@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class ServiceWithRedisApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ServiceWithRedisApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceWithRedisApplication.class, args);
+    }
 
 }

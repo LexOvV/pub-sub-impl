@@ -11,12 +11,12 @@ import java.io.ByteArrayInputStream;
 @Service
 @Primary
 public class SignWithRedisService implements SignService {
+
     private RedisRepository<ByteArrayInputStream> redisRepository;
 
     @Override
     public ResponseEntity<Object> getSign(Object objToSign) {
         return ResponseEntity.ok().build();
     }
-
 
 }

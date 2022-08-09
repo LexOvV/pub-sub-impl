@@ -4,14 +4,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
-public class MessageDto {
+public class SubscriberDto {
 
     @NotBlank
-    String topic;
-    @NotNull
-    Object message;
+    String subscriberName;
+    @NotBlank
+    String topicToSubscribe;
 }

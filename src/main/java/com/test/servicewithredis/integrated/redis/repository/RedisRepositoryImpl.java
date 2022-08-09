@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @Repository
 public class RedisRepositoryImpl<T> implements RedisRepository<T> {
+
     private static final String KEY = "1111";
 
     private StringRedisTemplate redisTemplate;

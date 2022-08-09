@@ -35,9 +35,15 @@ public class RedisConfig {
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     }
 
+//    @Bean
+//    public MessageListenerAdapter messageListener() {
+//        return new MessageListenerAdapter(new RedisMessageSubscriber());
+//    }
+
     @Bean
-    public MessageListenerAdapter messageListener() {
-        return new MessageListenerAdapter(new RedisMessageSubscriber());
+    @Scope(value = "prototype")
+    public MessageListenerAdapter messageSubscriber(@Value(value = "subscriber") RedisMessageSubscriber subscriber) {
+        return new MessageListenerAdapter(subscriber);
     }
 
     @Bean
@@ -49,7 +55,7 @@ public class RedisConfig {
     public RedisMessageListenerContainer redisContainer() {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory());
-        container.addMessageListener(messageListener(), topic("def"));
+//        container.addMessageListener(messageListener(), topic("def"));
         return container;
     }
 
