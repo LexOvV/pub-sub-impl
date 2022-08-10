@@ -1,5 +1,6 @@
 package com.test.servicewithredis.integrated.redis.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -21,7 +21,10 @@ public class RedisTopicService implements TopicService {
 
     @Override
     public ChannelTopicAdapter addNewTopic(String name) {
-        ChannelTopicAdapter topicAdapter = applicationContext.getBean(ChannelTopicAdapter.class, name);
+        if (redisChanelTopics.contains(name)) {
+            throw new IllegalArgumentException("Topic already exists");
+        }
+        ChannelTopicAdapter topicAdapter = (ChannelTopicAdapter) applicationContext.getBean(name);
         return topicAdapter;
 //        return new ChannelTopicAdapter(name);
     }

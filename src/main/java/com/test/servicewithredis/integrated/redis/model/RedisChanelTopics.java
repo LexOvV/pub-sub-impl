@@ -58,6 +58,16 @@ public final class RedisChanelTopics {
     }
 
     /**
+     * Check if {@link ChannelTopic ChannelTopic} exists in the Set of topics.
+     *
+     * @return true if exists
+     */
+    public boolean contains(String topicName) {
+        return channelTopics.stream()
+                .anyMatch(t -> t.toString().equals(topicName));
+    }
+
+    /**
      * The method allows getting a copy of existing {@link ChannelTopic ChannelTopic} by name.
      *
      * @return a copy of existing {@link ChannelTopic ChannelTopic}.

@@ -35,11 +35,6 @@ public class RedisConfig {
         return new LettuceConnectionFactory(redisStandaloneConfiguration);
     }
 
-//    @Bean
-//    public MessageListenerAdapter messageListener() {
-//        return new MessageListenerAdapter(new RedisMessageSubscriber());
-//    }
-
     @Bean(name = "topic")
     @Scope(value = "prototype")
     public ChannelTopicAdapter getTopic(String name) {
@@ -65,7 +60,6 @@ public class RedisConfig {
     public RedisMessageListenerContainer redisContainer() {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory());
-//        container.addMessageListener(messageListener(), topic("def"));
         return container;
     }
 
