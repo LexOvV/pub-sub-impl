@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Component
 @Validated
-@ConfigurationProperties(prefix = "prefix.redis")
+@ConfigurationProperties(prefix = "project.redis")
 public class RedisSettings {
 
     @NotNull

@@ -18,7 +18,7 @@ import java.util.Set;
 
 public final class RedisChanelTopics {
 
-    private volatile static Set<ChannelTopic> channelTopics = new HashSet<>();
+    private volatile static Set<ChannelTopicAdapter> channelTopics = new HashSet<>();
 
     /**
      * Add new Topic by {@link String String} name.
@@ -27,7 +27,7 @@ public final class RedisChanelTopics {
      * @throws ValidationException if topic name is empty or contains only whitespaces.
      */
     public static synchronized boolean addNewTopic(@NotBlank String name) {
-        ChannelTopic newTopic = new ChannelTopic(name);
+        ChannelTopicAdapter newTopic = new ChannelTopicAdapter(name);
         return channelTopics.add(newTopic);
     }
 
@@ -39,11 +39,11 @@ public final class RedisChanelTopics {
      * @throws ValidationException      if topic is null.
      * @throws IllegalArgumentException if topic name is empty or contains only whitespaces.
      */
-    public static synchronized boolean addNewTopic(@NotNull ChannelTopic topic) {
-        if (topic.getTopic().isBlank()) {
+    public static synchronized boolean addNewTopic(@NotNull ChannelTopicAdapter topic) {
+        if (topic.getChannelTopic().getTopic().isBlank()) {
             throw new IllegalArgumentException("Topic name must not be blank");
         }
-        ChannelTopic newTopic = new ChannelTopic(topic.toString());
+        ChannelTopicAdapter newTopic = new ChannelTopicAdapter(topic.toString());
         return channelTopics.add(newTopic);
     }
 
@@ -52,8 +52,9 @@ public final class RedisChanelTopics {
      *
      * @return true if exists
      */
-    public boolean contains(ChannelTopic topic) {
-        return channelTopics.contains(topic);
+    public boolean contains(ChannelTopicAdapter topic) {
+        return channelTopics.stream()
+                .anyMatch(t -> t.toString().equals(topic.toString()));
     }
 
     /**
@@ -63,11 +64,11 @@ public final class RedisChanelTopics {
      * @throws NoSuchElementException if topic doesn't exist.
      * @throws ValidationException    if topic name is empty or contains only whitespaces.
      */
-    public ChannelTopic getChanelTopicByName(@NotBlank String name) {
-        ChannelTopic copyOfTopic = new ChannelTopic(channelTopics.stream()
-                .filter(t -> t.toString().equals(name))
+    public ChannelTopicAdapter getChanelTopicByName(@NotBlank String name) {
+        ChannelTopicAdapter copyOfTopic = new ChannelTopicAdapter(channelTopics.stream()
+                .filter(t -> t.getChannelTopic().getTopic().equals(name))
                 .findFirst()
-                .map(ChannelTopic::toString)
+                .map(o -> o.getChannelTopic().toString())
                 .orElseThrow());
         return copyOfTopic;
     }
@@ -77,9 +78,11 @@ public final class RedisChanelTopics {
      *
      * @return {@link Set Set<ChannelTopic>} copies of topics.
      */
-    public Set<ChannelTopic> getChannelTopics() {
-        Set<ChannelTopic> copyOfTopics = new HashSet<>();
-        channelTopics.forEach(topic -> copyOfTopics.add(new ChannelTopic(topic.toString())));
+    public Set<ChannelTopicAdapter> getChannelTopics() {
+        Set<ChannelTopicAdapter> copyOfTopics = new HashSet<>();
+        channelTopics.forEach(topic -> copyOfTopics.add(
+                new ChannelTopicAdapter(topic.getChannelTopic().toString()))
+        );
         return copyOfTopics;
     }
 }

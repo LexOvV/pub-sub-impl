@@ -1,5 +1,6 @@
 package com.test.servicewithredis.integrated.redis.config;
 
+import com.test.servicewithredis.integrated.redis.model.ChannelTopicAdapter;
 import com.test.servicewithredis.integrated.redis.model.RedisChanelTopics;
 import com.test.servicewithredis.integrated.redis.publisher.MessagePublisher;
 import com.test.servicewithredis.integrated.redis.publisher.RedisMessagePublisher;
@@ -72,9 +73,13 @@ public class RedisConfig {
         return template;
     }
 
-    @Bean
+    @Bean(name = "topic")
     @Scope(value = "prototype")
-    public ChannelTopic topic(@Value(value = "name") String name) {
-        return new ChannelTopic(name);
+    public ChannelTopicAdapter getTopic(String name) {
+        ChannelTopicAdapter topic = new ChannelTopicAdapter(name);
+        System.out.println("=======" + topic.getChannelTopic().toString() + " created");
+        boolean b = RedisChanelTopics.addNewTopic(topic);
+        System.out.println(b);
+        return topic;
     }
 }

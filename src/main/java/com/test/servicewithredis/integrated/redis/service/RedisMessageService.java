@@ -1,6 +1,7 @@
 package com.test.servicewithredis.integrated.redis.service;
 
 import com.test.servicewithredis.integrated.redis.dto.MessageDto;
+import com.test.servicewithredis.integrated.redis.model.ChannelTopicAdapter;
 import com.test.servicewithredis.integrated.redis.model.RedisChanelTopics;
 import com.test.servicewithredis.integrated.redis.publisher.MessagePublisher;
 import com.test.servicewithredis.service.MessageService;
@@ -18,13 +19,13 @@ public class RedisMessageService implements MessageService {
     private final RedisChanelTopics redisChanelTopics;
 
     @Override
-    public void publish(ChannelTopic topic, Object message) {
+    public void publish(ChannelTopicAdapter topic, Object message) {
         messagePublisher.publish(topic, message);
     }
 
     @Override
     public void publish(MessageDto messageDto) {
-        ChannelTopic topic = redisChanelTopics.getChanelTopicByName(messageDto.getTopic());
+        ChannelTopicAdapter topic = redisChanelTopics.getChanelTopicByName(messageDto.getTopic());
         messagePublisher.publish(topic, messageDto.getMessage());
     }
 }
