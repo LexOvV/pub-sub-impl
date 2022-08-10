@@ -13,16 +13,16 @@ public class ChannelTopicAdapter {
         this.channelTopic = new ChannelTopic(name);
     }
 
+    @Override
+    public String toString() {
+        return channelTopic.toString();
+    }
+
     public ChannelTopic getChannelTopic() {
         return channelTopic;
     }
 
     public void setChannelTopic(String name) {
         this.channelTopic = new ChannelTopic(name);
-    }
-
-    @Override
-    public String toString() {
-        return channelTopic.toString();
     }
 }

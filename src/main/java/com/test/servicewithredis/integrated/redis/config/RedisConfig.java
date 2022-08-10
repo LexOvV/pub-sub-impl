@@ -15,7 +15,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 
@@ -40,6 +39,16 @@ public class RedisConfig {
 //    public MessageListenerAdapter messageListener() {
 //        return new MessageListenerAdapter(new RedisMessageSubscriber());
 //    }
+
+    @Bean(name = "topic")
+    @Scope(value = "prototype")
+    public ChannelTopicAdapter getTopic(String name) {
+        ChannelTopicAdapter topic = new ChannelTopicAdapter(name);
+        System.out.println("=======" + topic.getChannelTopic().toString() + " created");
+        boolean b = RedisChanelTopics.addNewTopic(topic);
+        System.out.println(b);
+        return topic;
+    }
 
     @Bean
     @Scope(value = "prototype")
@@ -71,15 +80,5 @@ public class RedisConfig {
         template.setConnectionFactory(connectionFactory);
 
         return template;
-    }
-
-    @Bean(name = "topic")
-    @Scope(value = "prototype")
-    public ChannelTopicAdapter getTopic(String name) {
-        ChannelTopicAdapter topic = new ChannelTopicAdapter(name);
-        System.out.println("=======" + topic.getChannelTopic().toString() + " created");
-        boolean b = RedisChanelTopics.addNewTopic(topic);
-        System.out.println(b);
-        return topic;
     }
 }

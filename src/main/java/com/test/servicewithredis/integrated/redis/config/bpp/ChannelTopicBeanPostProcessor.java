@@ -5,7 +5,6 @@ import com.test.servicewithredis.integrated.redis.model.RedisChanelTopics;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.data.redis.listener.ChannelTopic;
 
 @Slf4j
 public class ChannelTopicBeanPostProcessor implements BeanPostProcessor {

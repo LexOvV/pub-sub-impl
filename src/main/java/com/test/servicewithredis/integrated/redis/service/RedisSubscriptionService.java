@@ -7,7 +7,6 @@ import com.test.servicewithredis.integrated.redis.subscriber.RedisMessageSubscri
 import com.test.servicewithredis.service.SubscriptionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.stereotype.Service;

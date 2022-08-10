@@ -6,7 +6,6 @@ import com.test.servicewithredis.service.TopicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -16,6 +15,7 @@ import java.util.stream.Collectors;
 @Primary
 @RequiredArgsConstructor
 public class RedisTopicService implements TopicService {
+
     private final RedisChanelTopics redisChanelTopics;
     private final ApplicationContext applicationContext;
 

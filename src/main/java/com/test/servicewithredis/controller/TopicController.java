@@ -1,9 +1,7 @@
 package com.test.servicewithredis.controller;
 
-import com.test.servicewithredis.integrated.redis.model.ChannelTopicAdapter;
 import com.test.servicewithredis.service.TopicService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

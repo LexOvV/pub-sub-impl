@@ -4,7 +4,6 @@ import com.test.servicewithredis.integrated.redis.model.ChannelTopicAdapter;
 import com.test.servicewithredis.integrated.redis.model.RedisChanelTopics;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.listener.ChannelTopic;
 
 import java.util.NoSuchElementException;
 
